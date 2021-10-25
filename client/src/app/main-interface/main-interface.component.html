@@ -1,0 +1,38 @@
+<form 
+    [formGroup]="calcForm" 
+    (ngSubmit)="onSubmit()"
+>
+
+<div class="main-equation">
+    <mat-form-field appearance="fill">
+        <mat-label><ng-katex [equation]="linDiffOp"></ng-katex></mat-label>
+        <mat-select>
+            <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+            </mat-option> -->
+        </mat-select>
+    </mat-form-field>
+   
+    <div class='goal-func'>
+        <ng-katex [equation]="resEq"></ng-katex>
+    </div>
+
+    <mat-form-field appearance="fill">
+        <mat-label><ng-katex [equation]="funcOfExternalPerturbations"></ng-katex></mat-label>
+        <mat-select>
+            <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+            </mat-option> -->
+        </mat-select>
+    </mat-form-field>
+
+</div>
+
+    <button 
+        type="submit"
+        >Розв'язати
+    </button>
+
+</form>
+
+<ng-katex [equation]="equation"></ng-katex>
