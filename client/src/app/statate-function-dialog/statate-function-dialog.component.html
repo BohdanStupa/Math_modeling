@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Введення функції стану</h1>
+<div mat-dialog-content>
+  <h2>Функція стану:</h2>
+  <div class="write-func">
+    <ng-katex class="f-name" [equation]="data.funcOfExternalPerturbations"></ng-katex>
+    <span class="f-name">=</span>
+    <math-formula [nDim]="data.nDim"></math-formula>
+  </div>
+</div>
+<div mat-dialog-actions class="main-dialog-actions">
+  <button mat-button (click)="onNoClick()">Відмінити</button>
+  <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Ок</button>
+</div>

@@ -1,12 +1,23 @@
-<h1 mat-dialog-title>Введення </h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput>
-  </mat-form-field>
+<h1 mat-dialog-title>Введення дифференціального оператора</h1>
+<div mat-dialog-content class="main-dialog-content">
+  <div>
+    <h2>Оператор:</h2>
+    <div class="write-func">
+      <ng-katex class="f-name" [equation]="data.linDiffOp"></ng-katex>
+      <span class="f-name">=</span>
+      <math-formula [nDim]="data.nDim"></math-formula>
+  </div>
+  </div>
+  <div>
+    <h2>Відповідна функція Гріна:</h2>
+    <div class="write-func">
+      <ng-katex class="f-name" [equation]="data.greensFunction"></ng-katex>
+      <span class="f-name">=</span>
+      <math-formula [nDim]="data.nDim"></math-formula>
+    </div>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Ok</button>
+<div mat-dialog-actions class="main-dialog-actions">
+  <button mat-button (click)="onNoClick()">Відмінити</button>
+  <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Ок</button>
 </div>

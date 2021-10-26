@@ -1,0 +1,20 @@
+:host {
+    .write-func {
+        display: flex;
+        .f-name {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+    }
+
+    .main-dialog-actions {
+        display: flex;
+        justify-content: end;
+    }
+
+    ::ng-deep {
+        .mat-dialog-content {
+            overflow: visible;
+        }
+    }
+}
