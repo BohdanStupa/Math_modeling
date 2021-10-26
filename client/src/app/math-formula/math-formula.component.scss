@@ -1,0 +1,76 @@
+:host {
+    display: flex;
+    .eq {
+        display: flex;
+    }
+    
+    .add-eq-part {
+        margin-left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 18.8125px;
+        font-size: 2rem;
+        color: red;
+        
+        span {
+            cursor: pointer;
+            padding: 3px;
+            
+            &:hover {
+                background-color: rgb(250, 190, 190);
+                border-radius: 25%;
+            }
+        }
+    }
+    
+    ::ng-deep {
+        .mat-form-field-flex {
+            width: 90px;
+        }
+    }
+
+    .one-section {
+        position: relative;
+        margin-right: 7px;
+        display: flex;
+
+        .formula {
+            font-size: 1.4rem;
+
+            &.number {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+        }
+
+        .delete-section {
+            position: absolute;
+            padding: .2rem;
+            height: 1px;
+            width: 1px;
+            background-color: #ff8383;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        ::ng-deep {
+            mat-form-field {
+                margin-right: 2px;
+            }
+
+            .w-30 {
+                width: 50px;
+                .mat-form-field-flex {
+                    width: 50px;
+                }
+                .mat-form-field-infix {
+                    width: 50px;
+                }
+            }
+        }
+    }
+}

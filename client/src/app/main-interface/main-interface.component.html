@@ -7,6 +7,11 @@
     <mat-form-field appearance="fill">
         <mat-label><ng-katex [equation]="linDiffOp"></ng-katex></mat-label>
         <mat-select>
+            <mat-option
+                (click)="openLinDiffOpModal()"
+            >
+                Задати власну функцію
+            </mat-option>
             <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
             {{food.viewValue}}
             </mat-option> -->
@@ -27,12 +32,21 @@
     </mat-form-field>
 
 </div>
+    <button mat-flat-button color="primary">Розв'язати</button>
 
-    <button 
-        type="submit"
-        >Розв'язати
-    </button>
 
+    <button mat-raised-button (click)="openDialog()">Pick one</button>
+    
 </form>
 
 <ng-katex [equation]="equation"></ng-katex>
+
+D:
+
+
+<diff-operator [diffOperator]="{order: 1, values: [1]}"></diff-operator>
+<diff-operator [diffOperator]="{order: 2, values: [2]}"></diff-operator>
+<diff-operator [diffOperator]="{order: 2, values: [1, 2]}"></diff-operator>
+
+<math-formula [nDim]="3"></math-formula>
+<!-- <math-formula [nDim]="2" [nOrder]="2"></math-formula> -->

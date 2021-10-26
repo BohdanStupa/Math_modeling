@@ -1,0 +1,74 @@
+<div class="eq">
+    <ng-container 
+        *ngFor="let part of partitionsOfEquetion; index as i"
+    >
+        <ng-container
+        [ngTemplateOutlet]="onePartTemplate"
+        [ngTemplateOutletContext]="{ idx: i }"
+        ></ng-container>  
+    </ng-container>
+</div>
+
+<div class="add-eq-part">
+    <span (click)="addPart()">+</span>
+</div>
+
+<ng-template #onePartTemplate let-idx="idx">
+    <section class="one-section">
+        <ng-container *ngIf="!partitionsOfEquetion[idx].sign.editing; else editionSign">
+            <div class="formula number" (click)="onEditSign(idx)">
+                <ng-container *ngIf="partitionsOfEquetion[idx].sign.val; else minus">
+                    <span>+</span>
+                </ng-container>
+                <ng-template #minus>
+                    <span>-</span>
+                </ng-template>
+            </div>
+        </ng-container>
+        <ng-template #editionSign>
+            <mat-form-field appearance="fill" class="w-30">
+                <mat-select (selectionChange)="selectSign($event, idx)">
+                    <mat-option value="+">
+                        +  
+                    </mat-option>
+                    <mat-option value="-">
+                        -
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </ng-template>
+
+        <ng-container *ngIf="!partitionsOfEquetion[idx].coef.editing; else editionCoef">
+            <div class="formula number" (click)="onEditCoef(idx)">
+                <span >{{ partitionsOfEquetion[idx].coef.val }}</span>
+            </div>
+        </ng-container>
+        <ng-template #editionCoef>
+            <mat-form-field 
+                class="w-30" 
+                appearance="fill"
+                >
+                <input matInput (blur)="onChangeCoef($event, idx)" placeholder="C">
+            </mat-form-field>
+        </ng-template>
+
+        <ng-container *ngIf="!partitionsOfEquetion[idx].op.editing; else editionOp">
+            <diff-operator 
+                class="formula number"
+                (click)="onEditOp(idx)"
+                [diffOperator]="partitionsOfEquetion[idx].op.val"></diff-operator>
+        </ng-container>
+        <ng-template #editionOp>
+            <mat-form-field appearance="fill">
+                <mat-select (selectionChange)="selectOp($event, idx)">
+                    <mat-option *ngFor="let op of operators" [value]="op">
+                        <diff-operator  [diffOperator]="op"></diff-operator>    
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </ng-template>
+
+        <!-- <span class="delete-section"></span> -->
+    </section>
+</ng-template>
+
