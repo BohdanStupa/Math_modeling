@@ -13,14 +13,14 @@ export class MainInterfaceComponent implements OnInit {
 
   // public options
   public calcForm: FormGroup;
-
   public calculate: FormControl;
   
-  equation: string = ' \\frac{d^2 u}{dx^2} ';
-
   linDiffOp = '\L(\\delta_{s})';
   funcOfExternalPerturbations = 'u(s)';
   resEq = 'y(s) = ';
+
+
+  nDim = 2;
 
   constructor(
     private _apiService: ApiService,
@@ -60,7 +60,7 @@ export class MainInterfaceComponent implements OnInit {
   openLinDiffOpModal(): void {
     console.log("openLinDiffOpModal");
     const dialogRef = this.dialog.open(LinearDifferentialOperatorDialog, {
-      width: '250px',
+      width: '60%',
       data: {name: this.name, animal: this.animal}
     });
 
@@ -86,4 +86,10 @@ export class MainInterfaceComponent implements OnInit {
 
   }
 
+  onChangeNDim($event) {
+    let newNDim = $event.target.value;
+    if (!Number.isNaN(Number.parseInt(newNDim))) {
+      this.nDim = newNDim;
+    }
+  }
 }
