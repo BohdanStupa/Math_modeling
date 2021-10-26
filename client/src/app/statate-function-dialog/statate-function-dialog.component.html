@@ -4,7 +4,7 @@
   <div class="write-func">
     <ng-katex class="f-name" [equation]="data.funcOfExternalPerturbations"></ng-katex>
     <span class="f-name">=</span>
-    <math-formula [nDim]="data.nDim"></math-formula>
+    <math-formula [nDim]="data.nDim" [literalTypes]="data.literalForStateFunction"></math-formula>
   </div>
 </div>
 <div mat-dialog-actions class="main-dialog-actions">

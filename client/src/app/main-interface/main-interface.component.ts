@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MathLiteralType } from '../interfaces/math-formules.interface';
 import { LinearDifferentialOperatorDialogComponent } from '../linear-differential-operator-dialog/linear-differential-operator-dialog.component';
 import { ApiService } from '../services/api.service';
 import { StatateFunctionDialogComponent } from '../statate-function-dialog/statate-function-dialog.component';
@@ -44,9 +45,17 @@ export class MainInterfaceComponent implements OnInit {
 
   openLinDiffOpDialog(): void {
     console.log("openLinDiffOpDialog");
+    let literalTypesForOperator: MathLiteralType = "diff_operator";
+    let literalsForGreensFunction: MathLiteralType = "x_value";
     const dialogRef = this.dialog.open(LinearDifferentialOperatorDialogComponent, {
       width: '60%',
-      data: { nDim: this.nDim, linDiffOp: this.linDiffOp, greensFunction: this.greensFunction }
+      data: { 
+        nDim: this.nDim, 
+        linDiffOp: this.linDiffOp, 
+        greensFunction: this.greensFunction,
+        literalTypesForOperator,
+        literalsForGreensFunction
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -57,9 +66,14 @@ export class MainInterfaceComponent implements OnInit {
 
   openStateFunctionDialog(): void {
     console.log("openStateFunctionDialog");
+    let literalForStateFunction: MathLiteralType = "x_value";
     const dialogRef = this.dialog.open(StatateFunctionDialogComponent, {
       width: '60%',
-      data: { nDim: this.nDim, funcOfExternalPerturbations: this.funcOfExternalPerturbations }
+      data: { 
+        nDim: this.nDim, 
+        funcOfExternalPerturbations: this.funcOfExternalPerturbations,
+        literalForStateFunction
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

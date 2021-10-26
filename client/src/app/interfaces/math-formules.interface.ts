@@ -3,6 +3,12 @@ export interface DiffOperator {
     values: Array<number>;
 }
 
+export interface XValue {
+    power: number;
+    index: number;
+}
+
+export type MathLiteralType = "diff_operator" | "x_value";
 
 export interface EqPart {
     sign: {
@@ -14,7 +20,12 @@ export interface EqPart {
         editing: boolean;
     }
     op: {
-        val: DiffOperator | null;
+        val: DiffOperator | XValue | null;
         editing: boolean;
     };
+}
+
+export interface MathLiteral {
+    type: MathLiteralType;
+    literal: DiffOperator | XValue;
 }

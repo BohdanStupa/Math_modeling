@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { DiffOperator, EqPart } from '../interfaces/math-formules.interface';
+import { DiffOperator, EqPart, MathLiteral, MathLiteralType, XValue } from '../interfaces/math-formules.interface';
 
 @Component({
   selector: 'math-formula',
@@ -11,9 +11,10 @@ export class MathFormula implements OnInit {
 
   @Input() nDim!: number;
   @Input() nOrder: number = 2;
+  @Input() literalTypes: MathLiteralType;
 
   partitionsOfEquetion: Array<EqPart> = [];
-  operators: Array<DiffOperator> = [];
+  operators: Array<MathLiteral> = [];
 
   constructor() {}  
 
@@ -21,20 +22,37 @@ export class MathFormula implements OnInit {
     // console.log("MathFormula", this.nDim);
     let usedOps = new Set();
 
-    for (let i = 1; i <= this.nDim; ++i) {
-        for (let j = 1; j <= this.nOrder; ++j){
-            this.operators.push({order: j, values: [i]} as DiffOperator);            
-            if (j == 2) {
-                for (let k = 1; k <= this.nDim; ++k) {
-                    let key1 = "" + k + i, key2 = "" + i + k;
-                    if (i != k && !usedOps.has(key1) && !usedOps.has(key2)) {
-                        usedOps.add(key1);
-                        usedOps.add(key2);
-                        this.operators.push({ order: j, values:[i, k] } as DiffOperator);                                   
-                    }
-                }
-            }
+    if (this.literalTypes == "diff_operator") {
+      for (let i = 1; i <= this.nDim; ++i) {
+          for (let j = 1; j <= this.nOrder; ++j){
+              this.operators.push({
+                literal: { order: j, values: [i]} as DiffOperator,
+                type: this.literalTypes
+              });          
+              if (j == 2) {
+                  for (let k = 1; k <= this.nDim; ++k) {
+                      let key1 = "" + k + i, key2 = "" + i + k;
+                      if (i != k && !usedOps.has(key1) && !usedOps.has(key2)) {
+                          usedOps.add(key1);
+                          usedOps.add(key2);
+                          this.operators.push({
+                            literal: { order: j, values: [i, k]} as DiffOperator,
+                            type: this.literalTypes
+                          });                                  
+                      }
+                  }
+              }
+          }
+      }
+    } else if (this.literalTypes == "x_value") {
+      for (let i = 1; i <= this.nDim; ++i) {
+        for (let j = 1; j <= this.nOrder; ++j) {
+          this.operators.push({
+            literal: { power: j, index: i } as XValue,
+            type: this.literalTypes
+          });
         }
+      }
     }
   }
 
@@ -79,23 +97,18 @@ export class MathFormula implements OnInit {
 
   selectOp($event: MatSelectChange, idx: number) {
     //   console.log("select op",$event, idx, $event.value);
-      this.partitionsOfEquetion[idx].op.val = {
-          order: null,
-          values: null
-      };
-      this.partitionsOfEquetion[idx].op.val.order = $event.value.order;
-      this.partitionsOfEquetion[idx].op.val.values = $event.value.values;
-      this.partitionsOfEquetion[idx].op.editing = false;
+    this.partitionsOfEquetion[idx].op.val = $event.value;
+    this.partitionsOfEquetion[idx].op.editing = false;
   }
   
 
   onChangeCoef($event: FocusEvent, idx: number) {
     //   console.log("CHANGE COEF", $event, idx);
-      let coef = ($event.target as HTMLInputElement).value as any;
-      if (!Number.isNaN(Number.parseFloat(coef))) {
-        this.partitionsOfEquetion[idx].coef.editing = false;
-        this.partitionsOfEquetion[idx].coef.val = coef;
-      }
+    let coef = ($event.target as HTMLInputElement).value as any;
+    if (!Number.isNaN(Number.parseFloat(coef))) {
+      this.partitionsOfEquetion[idx].coef.editing = false;
+      this.partitionsOfEquetion[idx].coef.val = coef;
+    }
   }
 
 }

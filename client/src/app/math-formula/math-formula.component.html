@@ -53,16 +53,16 @@
         </ng-template>
 
         <ng-container *ngIf="!partitionsOfEquetion[idx].op.editing; else editionOp">
-            <diff-operator 
+            <math-literal
                 class="formula number"
                 (click)="onEditOp(idx)"
-                [diffOperator]="partitionsOfEquetion[idx].op.val"></diff-operator>
+                [mathLiteral]="partitionsOfEquetion[idx].op.val"></math-literal>
         </ng-container>
         <ng-template #editionOp>
             <mat-form-field appearance="fill">
                 <mat-select (selectionChange)="selectOp($event, idx)">
                     <mat-option *ngFor="let op of operators" [value]="op">
-                        <diff-operator  [diffOperator]="op"></diff-operator>    
+                        <math-literal [mathLiteral]="op"></math-literal >    
                     </mat-option>
                 </mat-select>
             </mat-form-field>

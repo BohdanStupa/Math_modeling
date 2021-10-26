@@ -5,7 +5,7 @@
     <div class="write-func">
       <ng-katex class="f-name" [equation]="data.linDiffOp"></ng-katex>
       <span class="f-name">=</span>
-      <math-formula [nDim]="data.nDim"></math-formula>
+      <math-formula [nDim]="data.nDim" [literalTypes]="data.literalTypesForOperator"></math-formula>
   </div>
   </div>
   <div>
@@ -13,7 +13,7 @@
     <div class="write-func">
       <ng-katex class="f-name" [equation]="data.greensFunction"></ng-katex>
       <span class="f-name">=</span>
-      <math-formula [nDim]="data.nDim"></math-formula>
+      <math-formula [nDim]="data.nDim" [literalTypes]="data.literalsForGreensFunction"></math-formula>
     </div>
   </div>
 </div>
